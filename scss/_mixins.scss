@@ -1,0 +1,120 @@
+/* _mixins.scss
+ * 
+ * @description 
+ * List of CSS3 Sass mixins file
+ * The purpose of this library is to streamline the process the use of CSS3 on different browsers
+ *
+ * @author Francis-G - https://github.com/Francis-G
+ * @link https://github.com/Francis-G/css3-mixins.scss
+ */
+
+/*
+ * Adds a browser prexif to the property
+ */
+@mixin css3-prefix($property, $value) {
+    -webkit-#{$property}: #{$value};
+    -khtml-#{$property}: #{$value};
+    -moz-#{$property}: #{$value};
+    -ms-#{$property}: #{$value};
+    -o-#{$property}: #{$value};
+    #{$property}: #{$value};
+}
+/*
+ * Usage example
+ * @include filter(grayscale(100%));
+ *
+ * Greyscale
+ * Blur
+ * Saturate
+ * Sepia
+ * Hue Rotate
+ * Invert
+ * Brightness
+ * Contrast
+ * Opacity
+ */
+@mixin filter( $var ) {
+    @include css3-prefix(filter, $var);
+}
+
+/*
+ * Usage example
+ * @include transition(padding, 1s, ease-in-out);
+ */
+@mixin transition($transition-property, $transition-time, $method) {
+    @include css3-prefix(transition, $transition-property $transition-time $method);
+}
+
+/*
+ * Usage example
+ * @include box-shadow(0px 4px 5px #666, 2px 6px 10px #999);
+ */
+
+@mixin box-shadow($shadows) {
+    @include css3-prefix(box-shadow, $shadows);
+}
+
+/*
+ * Usage example
+ * .clearfix{ @include clearfix;}
+ */
+
+@mixin clearfix {
+    display: inline-block;
+    &:after {
+        content: ".";
+        display: block;
+        height: 0;
+        clear: both;
+        visibility: hidden;
+    }
+    * html & { height: 1px }
+}
+
+/*
+ * Generic transform
+ * Usage example
+ * @include transform
+*/
+@mixin transform($transforms) {
+    @include css3-prefix(transform, $transforms);
+}
+
+/*
+ * Usage example
+ * @include rotate(10deg)
+ */
+@mixin rotate ($deg) {
+    @include transform(rotate(#{$deg}deg));
+}
+
+/*
+ * Usage example
+ * @include scale(1.1)
+ */
+@mixin scale($scale) {
+    @include transform(scale($scale));
+} 
+
+/*
+ * Usage example
+ * @include translate(50%, 50%)
+ */
+@mixin translate ($x, $y) {
+    @include transform(translate($x, $y));
+}
+
+/*
+ * Usage example
+ * @include skew(10deg, 10deg)
+ */
+@mixin skew ($x, $y) {
+    @include transform(skew(#{$x}deg, #{$y}deg));
+}
+/*
+ * Usage example
+ * @include transform-origin(50% 50%);
+ */
+@mixin transform-origin ($origin) {
+    @include css3-prefix(transform-origin, $origin);
+}
