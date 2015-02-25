@@ -15,7 +15,11 @@
     -webkit-#{$property}: #{$value};
     -khtml-#{$property}: #{$value};
     -moz-#{$property}: #{$value};
-    -ms-#{$property}: #{$value};
+    @if $property == 'opacity' {
+        -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity="+#{$value}+")";
+    } @else {
+        -ms-#{$property}: #{$value};
+    }
     -o-#{$property}: #{$value};
     #{$property}: #{$value};
 }
@@ -52,6 +56,16 @@
 
 @mixin box-shadow($shadows) {
     @include css3-prefix(box-shadow, $shadows);
+}
+
+/*
+ * Usage example
+ * @include opacity(0.5)
+ */
+
+@mixin opacity($opacity){
+    @include css3-prefix('opacity', $opacity);
+    filter: alpha(opacity=$opacity);
 }
 
 /*
